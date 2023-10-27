@@ -27,7 +27,7 @@ module.exports = {
     // path: "title",
     path: "id",
     type: "string",
-    regex:"/^[0-9a-fA-F]{24}$/"
+    // regex:"/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i"
     // length: { min: 3, max: 20 },
     // custom: 'title',
   },
@@ -115,7 +115,7 @@ module.exports = {
     items: {
       type: "String",
       // length: { min: 1, max: 100 },
-      regex:"/^[0-9a-fA-F]{24}$/"
+      // regex:"/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i"
     },
   },
   code: {

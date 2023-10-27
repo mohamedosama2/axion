@@ -25,13 +25,13 @@ module.exports = ({ meta, config, managers, mongomodels }) => {
         _id: new mongoose.Types.ObjectId(decoded.userId),
       });
 
-      if (!user.enabled)
+      if (!user?.enabled)
         return managers.responseDispatcher.dispatch(res, {
           ok: false,
           code: 401,
           errors: "User Disabled",
         });
-
+ 
       /// disabled
 
       req.me = user;
