@@ -7,6 +7,9 @@ module.exports = class UserServer {
     constructor({config, managers}){
         this.config        = config;
         this.userApi       = managers.userApi;
+        this.authApi       = managers.authApi;
+        this.schoolApi       = managers.schoolApi;
+        this.classApi       = managers.classApi;
     }
     
     /** for injecting middlewares */
@@ -28,7 +31,10 @@ module.exports = class UserServer {
         });
         
         /** a single middleware to handle all */
-        app.all('/api/:moduleName/:fnName', this.userApi.mw);
+        app.all('/api/auth/:moduleName/:fnName', this.authApi.mw);
+        app.all('/api/users/:moduleName/:fnName', this.userApi.mw);
+        app.all('/api/school/:moduleName/:fnName', this.schoolApi.mw);
+        app.all('/api/class/:moduleName/:fnName', this.classApi.mw);
 
         let server = http.createServer(app);
         server.listen(this.config.dotEnv.USER_PORT, () => {

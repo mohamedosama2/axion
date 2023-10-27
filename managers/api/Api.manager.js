@@ -42,10 +42,12 @@ module.exports = class ApiHandler {
                         method=frags[0];
                         fnName=frags[1];
                     }
+
                     if(!this.methodMatrix[mk][method]){
                         this.methodMatrix[mk][method]=[];
                     }
                     this.methodMatrix[mk][method].push(fnName);
+
 
                     let params = getParamNames(this.managers[mk][fnName], fnName, mk);
                     params = params.split(',').map(i=>{
@@ -83,10 +85,10 @@ module.exports = class ApiHandler {
         Object.keys(this.managers).forEach(mk=>{
             if(this.managers[mk].interceptor){
                 this.exposed[mk]=this.managers[mk];
-                // console.log(`## ${mk}`);
+                console.log(`## ${mk}`);
                 if(this.exposed[mk].cortexExposed){
                     this.exposed[mk].cortexExposed.forEach(i=>{
-                        // console.log(`* ${i} :`,getParamNames(this.exposed[mk][i]));
+                        console.log(`* ${i} :`,getParamNames(this.exposed[mk][i]));
                     })
                 }
             }
@@ -129,6 +131,10 @@ module.exports = class ApiHandler {
         let context       = req.params.context;
         let fnName        = req.params.fnName;
         let moduleMatrix  = this.methodMatrix[moduleName];
+
+        // console.log()
+        console.log(this.methodMatrix)
+        console.log(fnName)
 
         /** validate module */
         if(!moduleMatrix) return this.managers.responseDispatcher.dispatch(res, {ok: false, message: `module ${moduleName} not found`});
