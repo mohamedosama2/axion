@@ -77,7 +77,7 @@ module.exports = class Classes {
       _id: new mongoose.Types.ObjectId(id),
       type: "school",
     });
-    if (!isAuthorized && !res.req.me.role == "SUPERADMIN") {
+    if (!isAuthorized && res.req.me.role !== "SUPERADMIN") {
       return {
         error: "UnAuthorized",
       };
